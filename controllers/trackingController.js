@@ -48,7 +48,7 @@ const singlePost = async (req, res) => {
           + currentdate.getSeconds();
      try {
           const sqlAdd = `
-          INSERT INTO tracking(id, device_id, lat, lng, timestamp) 
+          INSERT INTO tracking(${`id`}, ${`device_id`}, ${`lat`}, ${`lng`}, ${`timestamp`}) 
           VALUES ('','${deviceId}','${position.lat}','${position.long}','${datetime}')
           `
           const sqlUpdate = `
