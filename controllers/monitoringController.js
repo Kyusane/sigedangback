@@ -48,7 +48,7 @@ const singlePost = async (req, res) => {
           + currentdate.getSeconds();
      try {
           const sqlAdd = `
-          INSERT INTO monitoring(id, device_id, tegangan,arus,daya,baterai, timestamp) 
+          INSERT INTO monitoring(${`id`}, ${`device_id`} ${`tegangan`},${`arus`},${`daya`},${`baterai`}, ${`timestamp`}) 
           VALUES ('','${deviceId}','${datas.tegangan}','${datas.arus}','${datas.daya}','${datas.baterai}','${datetime}')
           `
           const sqlUpdate = `
