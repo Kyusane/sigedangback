@@ -1,13 +1,18 @@
 const express = require('express')
 const db = require("./connection")
-const response = require("./response")
+const cors = require('cors')
+
+require('dotenv').config()
+
+const userRoutes = require('./routes/userRoutes')
+const trackingRoutes = require('./routes/trackingRoutes')
+const monitoringRoutes = require('./routes/monitoringRoutes')
 
 const app = express()
-const port = 5174
 
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-
 
 app.get('/',(req,res)=>{
      res.json({
@@ -15,15 +20,10 @@ app.get('/',(req,res)=>{
      })
 })
 
-app.get('/api-request/data',(req,res)=>{
-          const sql = `SELECT * FROM mahasiswa `
-          db.query(sql,(err,fields)=>{
-               if(err) throw err
-               response(200,fields,"Get all data",res)
-          })
-     
-})
+app.use('/api/user',userRoutes)
+app.use('/api/tracking', trackingRoutes)
+app.use('/api/monitoring', monitoringRoutes)
 
-app.listen(port,()=>{
-     console.log(`Server is running on port ${port}`)
+app.listen(process.env.PORT,()=>{
+     console.log(`Server is running on port ${process.env.PORT}`)
 })
