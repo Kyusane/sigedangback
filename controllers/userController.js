@@ -50,8 +50,8 @@ const userSignUp = async (req, res) => {
 
           const salt = await bcrypt.genSalt(10)
           const hash = await bcrypt.hash(password, salt)
-          const sqlSignUp = `INSERT INTO user (user_id, nama, email, password, role, login_status) 
-               VALUES ('','${nama}','${email}','${hash}','1','0')`
+          const sqlSignUp = `INSERT INTO user (nama, email, password, role, login_status) 
+               VALUES ('${nama}','${email}','${hash}','1','0')`
 
           db.query(sqlSignUp, (err) => {
                if(err) throw err
